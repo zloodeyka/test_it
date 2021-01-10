@@ -17,7 +17,7 @@ namespace Task.DataAccess
 		private static void RegisterUserContext(IServiceCollection services)
 		{
 			services.AddDbContext<Context>(opt =>
-											   opt.UseInMemoryDatabase("Users"));
+											   opt.UseSqlite("Data Source=users.db"));
 		}
 
 		private static void RegisterManagers(IServiceCollection services)

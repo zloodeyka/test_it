@@ -48,7 +48,7 @@
             deleteUser(id) {
                 axios
                     .delete(SiteUrl.Users_Delete(id))
-                    .then(this.userIsDeleted)
+                    .then(this.refreshUsersTable)
                     .catch(this.failed);
             },
             getUserData(id) {
@@ -65,20 +65,14 @@
                 this.oldUserData = userData;
 
                 axios.post(SiteUrl.Users_Add(), userData)
-                    .then(response => {
-                        alert("User was succesfully added");
-                        this.refreshUsersTable();
-                    })
+                    .then(this.refreshUsersTable)
                     .catch(this.failed);
             },
             updateUser(userData) {
                 this.oldUserData = userData;
                 
                 axios.put(SiteUrl.Users_Update(this.selectedUser.Id), userData)
-                    .then(response => {
-                        alert("User was succesfully updated");
-                        this.refreshUsersTable();
-                    })
+                    .then(this.refreshUsersTable)
                     .catch(this.failed);
             },
             setUserEditData(response) {
@@ -88,10 +82,6 @@
                     Email: response.data.email
                 };
                 this.actionName = "Edit";
-            },
-            userIsDeleted() {
-                alert("User was succesfully deleted");
-                this.refreshUsersTable();
             },
             refreshUsersTable() {
                 axios
